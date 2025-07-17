@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="MyDataPilot - Your AI assistant for data science. Analyze data, create visualizations, and get insights using simple language.">
+  <meta property="og:title" content="MyDataPilot - AI-Powered Data Science Assistant"/>
+  <meta property="og:description" content="Transform your data questions into insights. No coding required."/>
+  <meta property="og:url" content="https://mydatapilot.com/"/>
+  <meta property="og:image" content="static/images/logo.png" />
+  
+  <meta name="keywords" content="AI data analysis, no-code data science, AI assistant, data visualization, automated analysis">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>MyDataPilot: AI-Powered Data Science Assistant</title>
+  
+  <!-- 使用项目 logo 作为 favicon -->
+  <link rel="icon" type="image/png" href="static/images/logo.png">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Bulma CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Styles -->
+  <style>
+    /* Custom CSS Variables */
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --hover-transform: translateY(-5px);
+      --transition-speed: 0.3s;
+    }
+    
+    /* Font Override */
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    /* Logo Styles */
+    .logo-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .logo-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: transform var(--transition-speed);
+    }
+    
+    .logo-image:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .hero-logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 2rem;
+      animation: logoFloat 3s ease-in-out infinite;
+    }
+    
+    @keyframes logoFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-logo {
+      width: 40px;
+      height: 40px;
+      margin-right: 0.75rem;
+    }
+    
+    /* Hero Section */
+    .hero-gradient {
+      background: var(--primary-gradient);
+      position: relative;
+      overflow: hidden;
+      margin-top: 3.25rem; /* Account for fixed navbar */
+    }
+    
+    .hero-gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+    
+    .hero-body {
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Feature Cards */
+    .feature-card {
+      height: 100%;
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      cursor: pointer;
+    }
+    
+    .feature-card:hover {
+      transform: var(--hover-transform);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-card .card-content {
+      height: 100%;
+    }
+    
+    /* Buttons */
+    .button {
+      transition: all var(--transition-speed);
+      font-weight: 500;
+    }
+    
+    .button:hover {
+      transform: translateY(-2px);
+    }
+    
+    .button.is-large {
+      padding: 1.5rem 2rem;
+    }
+    
+    /* Section Spacing */
+    .section {
+      padding: 4rem 1.5rem;
+    }
+    
+    @media screen and (min-width: 1024px) {
+      .section {
+        padding: 6rem 1.5rem;
+      }
+    }
+    
+    /* Box Hover Effects */
+    .box {
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    
+    .box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Image Styling */
+    .image img {
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Tags */
+    .tag.is-react {
+      background-color: #61dafb;
+      color: #282c34;
+    }
+    
+    /* Title Styling */
+    .title {
+      font-weight: 700;
+    }
+    
+    .subtitle {
+      font-weight: 400;
+    }
+    
+    /* Icon Containers */
+    .icon.is-large {
+      width: 3rem;
+      height: 3rem;
+    }
+    
+    /* CTA Box */
+    .cta-gradient {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 4rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+    
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Loading Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+    
+    /* Footer Logo */
+    .footer-logo {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+      transition: opacity var(--transition-speed);
+    }
+    
+    .footer-logo:hover {
+      opacity: 1;
+    }
+    
+    /* Responsive Adjustments */
+    @media screen and (max-width: 768px) {
+      .hero.is-medium .hero-body {
+        padding: 6rem 1.5rem;
+      }
+      
+      .title.is-1 {
+        font-size: 2rem;
+      }
+      
+      .subtitle.is-3 {
+        font-size: 1.25rem;
+      }
+      
+      .hero-logo {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .navbar-logo {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item logo-container" href="https://xucheng63.github.io/webforml/">
+      <strong style="font-size: 1.25rem;">MyDataPilot</strong>
+    </a>
+    
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasic" class="navbar-menu">
+    <div class="navbar-end">
+      <a class="navbar-item" href="#how-it-works">
+        How it Works
+      </a>
+      <a class="navbar-item" href="#features">
+        Features
+      </a>
+      <a class="navbar-item" href="#about">
+        About
+      </a>
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary" href="https://drive.google.com/file/d/1OrWG1qD2Wt753s_2Pppc58CwIbY6VETo/view">
+            <strong>Try Now</strong>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section - Product Focus -->
+<section class="hero is-medium hero-gradient">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <!-- Logo in Hero -->
+      <img src="static/images/logo.png" alt="MyDataPilot" class="hero-logo fade-in">
+      
+      <h1 class="title is-1 has-text-white fade-in">
+        MyDataPilot
+      </h1>
+      <p class="subtitle is-3 has-text-white-ter fade-in">
+        AI-Powered Data Science Assistant
+      </p>
+      <div class="buttons is-centered mt-5 fade-in">
+        <a href="https://drive.google.com/file/d/1OrWG1qD2Wt753s_2Pppc58CwIbY6VETo/view" class="button is-primary is-large">
+          <span class="icon"><i class="fas fa-rocket"></i></span>
+          <span>Start Free</span>
+        </a>
+        <a href="#how-it-works" class="button is-light is-large">
+          <span class="icon"><i class="fas fa-play-circle"></i></span>
+          <span>See How It Works</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What You Can Do - Primary Focus -->
+<section class="section" id="features">
+  <div class="container">
+    <h2 class="title is-2 has-text-centered mb-6">What You Can Do With MyDataPilot</h2>
+    <p class="subtitle is-4 has-text-centered mb-6">
+      No coding or ML experience needed - just describe what you want
+    </p>
+    
+    <!-- Core Features Row -->
+    <div class="columns is-multiline mb-5">
+      <!-- Work with Your Files -->
+      <div class="column is-4">
+        <div class="card feature-card" style="height: 100%;">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <span class="icon is-large has-text-info">
+                  <i class="fas fa-folder-open fa-2x"></i>
+                </span>
+              </div>
+              <div class="media-content">
+                <p class="title is-4">Work with Your Local Files</p>
+              </div>
+            </div>
+            <div class="content">
+              <p><strong>Just mention your file path - AI handles the rest:</strong></p>
+              <ul>
+                <li>"Analyze the data in /Users/me/sales.csv"</li>
+                <li>"Create charts from C:\data\report.xlsx"</li>
+                <li>"Combine all CSV files in ./data folder"</li>
+              </ul>
+              <div class="notification is-info is-light mt-3">
+                <p class="is-size-7">
+                  <span class="icon"><i class="fas fa-info-circle"></i></span>
+                  No uploading needed - files stay on your computer
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- See & Control AI Process -->
+      <div class="column is-4">
+        <div class="card feature-card" style="height: 100%;">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <span class="icon is-large has-text-success">
+                  <i class="fas fa-comments fa-2x"></i>
+                </span>
+              </div>
+              <div class="media-content">
+                <p class="title is-4">See & Guide AI Thinking</p>
+              </div>
+            </div>
+            <div class="content">
+              <p><strong>Watch and modify how AI solves your problem:</strong></p>
+              <ul>
+                <li>View each step of AI's reasoning</li>
+                <li>Edit any decision or approach</li>
+                <li>AI adapts based on your changes</li>
+              </ul>
+              <div class="notification is-success is-light mt-3">
+                <p class="is-size-7">
+                  <span class="icon"><i class="fas fa-eye"></i></span>
+                  No "black box" - complete transparency
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Get Professional Results -->
+      <div class="column is-4">
+        <div class="card feature-card" style="height: 100%;">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <span class="icon is-large has-text-primary">
+                  <i class="fas fa-trophy fa-2x"></i>
+                </span>
+              </div>
+              <div class="media-content">
+                <p class="title is-4">Get Expert-Level Results</p>
+              </div>
+            </div>
+            <div class="content">
+              <p><strong>AI writes professional code you can use:</strong></p>
+              <ul>
+                <li>Download Python scripts to reuse</li>
+                <li>Export publication-ready charts</li>
+                <li>Get detailed analysis reports</li>
+              </ul>
+              <div class="notification is-primary is-light mt-3">
+                <p class="is-size-7">
+                  <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+                  Learn by seeing how experts approach problems
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Example Tasks for Non-Technical Users -->
+    <div class="box has-background-light">
+      <h3 class="title is-4 has-text-centered mb-4">
+        <span class="icon has-text-warning"><i class="fas fa-star"></i></span>
+        Popular Tasks for Non-Technical Users
+        <span class="icon has-text-warning"><i class="fas fa-star"></i></span>
+      </h3>
+      
+      <div class="columns is-multiline">
+        <div class="column is-6">
+          <article class="media">
+            <div class="media-left">
+              <span class="tag is-info is-medium">1</span>
+            </div>
+            <div class="media-content">
+              <strong>Sales Analysis</strong>
+              <p class="is-size-7">"Show me monthly sales trends from my Excel file and predict next quarter"</p>
+            </div>
+          </article>
+        </div>
+        
+        <div class="column is-6">
+          <article class="media">
+            <div class="media-left">
+              <span class="tag is-info is-medium">2</span>
+            </div>
+            <div class="media-content">
+              <strong>Customer Insights</strong>
+              <p class="is-size-7">"Find patterns in customer_data.csv and create segments"</p>
+            </div>
+          </article>
+        </div>
+        
+        <div class="column is-6">
+          <article class="media">
+            <div class="media-left">
+              <span class="tag is-info is-medium">3</span>
+            </div>
+            <div class="media-content">
+              <strong>Survey Analysis</strong>
+              <p class="is-size-7">"Summarize responses from survey_results.xlsx with charts"</p>
+            </div>
+          </article>
+        </div>
+        
+        <div class="column is-6">
+          <article class="media">
+            <div class="media-left">
+              <span class="tag is-info is-medium">4</span>
+            </div>
+            <div class="media-content">
+              <strong>Data Cleaning</strong>
+              <p class="is-size-7">"Clean messy_data.csv - fix errors and fill missing values"</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+<div class="columns is-vcentered mt-5">
+  <div class="column is-12">
+    <h4 class="title is-3 has-text-centered mb-5">Transform Your Questions Into Insights</h4>
+    
+    <!-- Before/After 展示 -->
+    <div class="columns">
+      <div class="column is-6">
+        <div class="box has-background-light">
+          <h5 class="title is-5 has-text-centered">
+            <span class="tag is-danger is-medium">Before MyDataPilot</span>
+          </h5>
+          <div class="content">
+            <p class="has-text-centered mb-4">
+              <span class="icon is-large has-text-grey">
+                <i class="fas fa-frown fa-3x"></i>
+              </span>
+            </p>
+            <ul>
+            <li>❌ "I need to learn scikit-learn first..."</li>
+            <li>❌ "Which algorithm should I use?"</li>
+            <li>❌ "How do I handle missing values?"</li>
+            <li>❌ "What's cross-validation again?"</li>
+            <li>❌ "My model accuracy is too low..."</li>
+            <li>❌ "How to tune hyperparameters?"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column is-6">
+        <div class="box has-background-primary has-text-white">
+          <h5 class="title is-5 has-text-centered has-text-white">
+            <span class="tag is-success is-medium">With MyDataPilot</span>
+          </h5>
+          <div class="content has-text-white">
+            <p class="has-text-centered mb-4">
+              <span class="icon is-large">
+                <i class="fas fa-smile fa-3x"></i>
+              </span>
+            </p>
+            <ul>
+          <li>✅ "Build a classifier for my dataset"</li>
+          <li>✅ "Predict sales using historical data"</li>
+          <li>✅ "Find customer segments in my CSV"</li>
+          <li>✅ "Compare different ML models"</li>
+          <li>✅ "Create a recommendation system"</li>
+          <li>✅ "Detect anomalies in sensor data"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 实际案例展示 -->
+    <div class="notification is-info is-light mt-5">
+      <div class="columns is-vcentered">
+        <div class="column is-8">
+          <p class="title is-5">Real ML Example:</p>
+          <p class="subtitle is-6">
+            <strong>User asked:</strong> "Predict customer churn using my subscription data"
+          </p>
+          <p><strong>MyDataPilot delivered:</strong></p>
+          <div class="tags">
+            <span class="tag is-success">Data Preprocessing</span>
+            <span class="tag is-success">Feature Engineering</span>
+            <span class="tag is-success">Model Selection</span>
+            <span class="tag is-success">Cross-Validation</span>
+            <span class="tag is-success">ROC Curves</span>
+            <span class="tag is-success">Feature Importance</span>
+          </div>
+        </div>
+        <div class="column is-4 has-text-centered">
+          <a href="#how-it-works" class="button is-info is-medium">
+            <span class="icon"><i class="fas fa-arrow-down"></i></span>
+            <span>See How It Works</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+
+<!-- How It Works - Enhanced with Workflow Diagram -->
+<section class="section is-light" id="how-it-works">
+  <div class="container">
+    <h2 class="title is-2 has-text-centered mb-6">How It Works</h2>
+    
+    <!-- 添加工作流程图 -->
+    <div class="columns is-centered mb-6">
+      <div class="column is-10">
+        <div class="box">
+          <h3 class="title is-4 has-text-centered mb-4">AI-Powered Workflow</h3>
+          <figure class="image">
+            <img src="static/images/workflow-diagram.png" alt="MyDataPilot Workflow: From user question to analysis results">
+          </figure>
+          <div class="content has-text-centered mt-4">
+            <p class="has-text-grey">
+              <em>From natural language question to professional data analysis - all automated with user control at every step</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+<div class="columns is-centered mb-6">
+  <div class="column is-10">
+    <div class="box">
+      <h3 class="title is-4 has-text-centered mb-4">
+        <span class="icon has-text-primary"><i class="fas fa-play-circle"></i></span>
+        Watch MyDataPilot in Action
+      </h3>
+      <div class="video-container">
+        <video controls class="video-demo" >
+          <source src="static/videos/use.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="content has-text-centered mt-4">
+        <p class="has-text-grey">
+          <em>See a complete walkthrough of analyzing data with MyDataPilot</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- 原有的步骤说明 -->
+    <div class="columns is-vcentered">
+      <div class="column is-6">
+        <div class="content is-medium">
+          <ol>
+            <li class="mb-4">
+              <strong>Ask in Plain English</strong><br>
+              Type what you want to analyze or create
+              <br><small class="has-text-grey">Example: "What are the key environmental factors that predict asthma rates across Illinois counties"</small>
+            </li>
+            <li class="mb-4">
+              <strong>AI Creates a Plan</strong><br>
+              Review the steps AI will take to solve your problem
+              <br><small class="has-text-grey">Automatic decomposition into manageable analysis steps</small>
+            </li>
+            <li class="mb-4">
+              <strong>Watch It Work</strong><br>
+              See each step execute with full transparency
+              <br><small class="has-text-grey">Edit analysis steps or code generation as needed</small>
+            </li>
+            <li class="mb-4">
+              <strong>Get Your Results</strong><br>
+              Download code, visualizations, or insights
+              <br><small class="has-text-grey">Professional analysis results ready to use</small>
+            </li>
+          </ol>
+        </div>
+      </div>
+<div class="column is-6">
+  <div class="box">
+    <!-- 图片展示区域 -->
+    <figure class="image mb-4">
+      <img id="feature-image" src="static/images/chat.png" alt="MyDataPilot Interface" style="transition: opacity 0.3s ease;">
+    </figure>
+    
+    <!-- 图片标题 -->
+    <p id="feature-caption" class="has-text-centered has-text-weight-bold mb-3">Main Chat Interface</p>
+    
+    <!-- 切换按钮 -->
+    <div class="buttons is-centered">
+      <button class="button is-small is-primary" onclick="showFeature(0)">
+        <span class="icon is-small"><i class="fas fa-comments"></i></span>
+        <span>Chat Interface</span>
+      </button>
+      <button class="button is-small is-info" onclick="showFeature(1)">
+        <span class="icon is-small"><i class="fas fa-tasks"></i></span>
+        <span>Task Planning</span>
+      </button>
+      <button class="button is-small is-success" onclick="showFeature(2)">
+        <span class="icon is-small"><i class="fas fa-eye"></i></span>
+        <span>AI Dialogue</span>
+      </button>
+      <button class="button is-small is-warning" onclick="showFeature(3)">
+        <span class="icon is-small"><i class="fas fa-edit"></i></span>
+        <span>Edit & Control</span>
+      </button>
+    </div>
+    
+    <!-- 自动切换指示器 -->
+    <div class="has-text-centered mt-3">
+      <span class="tag is-light is-small">
+        <span class="icon is-small"><i class="fas fa-circle" id="indicator-0"></i></span>
+        <span class="icon is-small"><i class="fas fa-circle" id="indicator-1"></i></span>
+        <span class="icon is-small"><i class="fas fa-circle" id="indicator-2"></i></span>
+        <span class="icon is-small"><i class="fas fa-circle" id="indicator-3"></i></span>
+      </span>
+    </div>
+  </div>
+</div>
+    </div>
+
+    <!-- 添加更详细的工作流程说明 -->
+    <div class="columns mt-6">
+      <div class="column is-12">
+        <div class="notification is-info is-light">
+          <h4 class="title is-5">
+            <span class="icon"><i class="fas fa-cogs"></i></span>
+            <span>Under the Hood</span>
+          </h4>
+          <div class="columns is-multiline">
+            <div class="column is-4">
+              <article class="media">
+                <div class="media-left">
+                  <span class="tag is-info is-medium">1</span>
+                </div>
+                <div class="media-content">
+                  <strong>Natural Language Understanding</strong>
+                  <p class="is-size-7">AI interprets your question and identifies the data analysis needed</p>
+                </div>
+              </article>
+            </div>
+            <div class="column is-4">
+              <article class="media">
+                <div class="media-left">
+                  <span class="tag is-info is-medium">2</span>
+                </div>
+                <div class="media-content">
+                  <strong>Task Decomposition</strong>
+                  <p class="is-size-7">Complex problems are broken down into manageable steps</p>
+                </div>
+              </article>
+            </div>
+            <div class="column is-4">
+              <article class="media">
+                <div class="media-left">
+                  <span class="tag is-info is-medium">3</span>
+                </div>
+                <div class="media-content">
+                  <strong>Interactive Execution</strong>
+                  <p class="is-size-7">You can edit and guide the AI at any step of the process</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key Features - User Benefits -->
+<section class="section">
+  <div class="container">
+    <h2 class="title is-2 has-text-centered mb-6">Why Choose MyDataPilot</h2>
+    
+    <div class="columns is-multiline">
+      <!-- No Coding Required -->
+      <div class="column is-6">
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <span class="icon is-large has-text-success">
+                <i class="fas fa-check-circle fa-2x"></i>
+              </span>
+            </div>
+            <div class="media-content">
+              <h4 class="title is-4">No Coding Required</h4>
+              <p>Just describe what you want in plain language. Our AI handles all the technical complexity behind the scenes.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Full Control -->
+      <div class="column is-6">
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <span class="icon is-large has-text-info">
+                <i class="fas fa-sliders-h fa-2x"></i>
+              </span>
+            </div>
+            <div class="media-content">
+              <h4 class="title is-4">You're Always in Control</h4>
+              <p>Edit AI decisions, retry steps, or modify the approach. You guide the process while AI does the work.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- See How AI Thinks -->
+      <div class="column is-6">
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <span class="icon is-large has-text-primary">
+                <i class="fas fa-eye fa-2x"></i>
+              </span>
+            </div>
+            <div class="media-content">
+              <h4 class="title is-4">See How AI Thinks</h4>
+              <p>View and modify the AI's reasoning process. Understand exactly how your results are generated.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Your Data, Your Control -->
+      <div class="column is-6">
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <span class="icon is-large has-text-warning">
+                <i class="fas fa-lock fa-2x"></i>
+              </span>
+            </div>
+            <div class="media-content">
+              <h4 class="title is-4">Your Data Stays Yours</h4>
+              <p>Use your own OpenAI API key. Your data and analysis remain completely private and under your control.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Use Cases -->
+<section class="section is-light">
+  <div class="container">
+    <h2 class="title is-2 has-text-centered mb-6">Perfect For</h2>
+    
+    <div class="columns">
+      <div class="column">
+        <div class="card">
+          <div class="card-content has-text-centered">
+            <span class="icon is-large has-text-info mb-3">
+              <i class="fas fa-briefcase fa-3x"></i>
+            </span>
+            <p class="title is-5">Business Analysts</p>
+            <p>Create reports and dashboards without waiting for IT</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column">
+        <div class="card">
+          <div class="card-content has-text-centered">
+            <span class="icon is-large has-text-success mb-3">
+              <i class="fas fa-microscope fa-3x"></i>
+            </span>
+            <p class="title is-5">Researchers</p>
+            <p>Analyze experimental data and create publication-ready plots</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column">
+        <div class="card">
+          <div class="card-content has-text-centered">
+            <span class="icon is-large has-text-warning mb-3">
+              <i class="fas fa-graduation-cap fa-3x"></i>
+            </span>
+            <p class="title is-5">Students</p>
+            <p>Learn data science by seeing how experts approach problems</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column">
+        <div class="card">
+          <div class="card-content has-text-centered">
+            <span class="icon is-large has-text-primary mb-3">
+              <i class="fas fa-chart-pie fa-3x"></i>
+            </span>
+            <p class="title is-5">Entrepreneurs</p>
+            <p>Make data-driven decisions without hiring data scientists</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section">
+  <div class="container">
+    <div class="box cta-gradient">
+      <h2 class="title is-2 has-text-white">Ready to Transform Your Data?</h2>
+      <p class="subtitle is-4 has-text-white-ter mb-5">
+        Join thousands of users who are getting insights faster with AI
+      </p>
+      <div class="buttons is-centered">
+        <a href="https://drive.google.com/file/d/1OrWG1qD2Wt753s_2Pppc58CwIbY6VETo/view" class="button is-white is-large">
+          <span class="icon"><i class="fas fa-rocket"></i></span>
+          <span>Start Free Now</span>
+        </a>
+      </div>
+      <p class="has-text-white-ter mt-3">
+        <small>No credit card required • Use your own OpenAI API key</small>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Technical Details (Moved Down) -->
+<section class="section is-light">
+  <div class="container">
+    <h2 class="title is-2 has-text-centered mb-6">How We Built It</h2>
+    
+    <div class="columns">
+      <div class="column is-half">
+        <h4 class="title is-4">Smart AI Architecture</h4>
+        <p class="mb-4">
+          MyDataPilot uses multiple specialized AI agents that work together to understand your request, 
+          plan the solution, write code, and verify results. Each step is transparent and editable.
+        </p>
+        <figure class="image">
+          <img src="static/images/prompter.png" alt="AI Architecture">
+        </figure>
+      </div>
+      
+      <div class="column is-half">
+        <h4 class="title is-4">Built for Everyone</h4>
+        <div class="content">
+          <ul>
+            <li><strong>Natural Language Interface:</strong> No technical jargon required</li>
+            <li><strong>Step-by-Step Execution:</strong> See exactly what's happening</li>
+            <li><strong>Error Recovery:</strong> AI automatically fixes issues</li>
+            <li><strong>Export Everything:</strong> Download code, data, or reports</li>
+          </ul>
+        </div>
+        
+        <div class="notification is-info is-light">
+          <p>
+            <strong>Open Source:</strong> View our code, contribute features, or deploy your own instance.
+          </p>
+          <a href="https://github.com/Xucheng63/project" class="button is-info is-outlined mt-2">
+            <span class="icon"><i class="fab fa-github"></i></span>
+            <span>View on GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8 has-text-centered">
+        <h2 class="title is-3">About MyDataPilot</h2>
+        <p class="subtitle is-5">
+          Created at the University of Illinois Urbana-Champaign
+        </p>
+        <div class="content">
+          <p>
+            MyDataPilot makes advanced data science accessible to everyone. 
+            Our mission is to empower professionals, researchers, and students 
+            with AI tools that amplify their capabilities without requiring 
+            programming expertise.
+          </p>
+        </div>
+        
+        <div class="columns is-centered mt-5">
+          <div class="column is-4">
+            <p><strong>Xucheng Yu</strong><br>
+            <small>Lead Developer</small></p>
+          </div>
+          <div class="column is-4">
+            <p><strong>Professor Haohan Wang</strong><br>
+            <small>Project Advisor</small></p>
+          </div>
+        </div>
+        
+        <div class="buttons is-centered mt-5">
+          <a href="mailto:xy63@illinois.edu" class="button is-primary is-outlined">
+            <span class="icon"><i class="fas fa-envelope"></i></span>
+            <span>Contact Us</span>
+          </a>
+          <a href="https://arxiv.org/abs/2505.13546" class="button is-link is-outlined">
+            <span class="icon"><i class="fas fa-file-pdf"></i></span>
+            <span>Read Paper</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <!-- Footer Logo -->
+      <img src="static/images/logo.png" alt="MyDataPilot" class="footer-logo">
+      
+      <p>
+        <strong>MyDataPilot</strong> by University of Illinois Urbana-Champaign.
+        The source code is licensed under <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+      </p>
+      <p>
+        <a href="https://github.com/Xucheng63/project">GitHub</a> • 
+        <a href="mailto:xy63@illinois.edu">Contact</a> • 
+        <a href="https://arxiv.org/abs/2505.13546">Paper</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // 平滑滚动
+    $('a[href^="#"]').on('click', function(e) {
+      e.preventDefault();
+      const target = $($(this).attr('href'));
+      if (target.length) {
+        $('html, body').animate({
+          scrollTop: target.offset().top - 100
+        }, 500);
+      }
+    });
+    
+    // 添加淡入动画
+    $('.fade-in').each(function(i) {
+      $(this).delay(100 * i).queue(function() {
+        $(this).addClass('animated');
+      });
+    });
+    
+    // 卡片悬浮效果
+    $('.feature-card, .box').hover(
+      function() {
+        $(this).addClass('is-hovering');
+      },
+      function() {
+        $(this).removeClass('is-hovering');
+      }
+    );
+    
+    // Navbar burger functionality
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    if ($navbarBurgers.length > 0) {
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    }
+  });
+</script>
+<script>
+  // 功能展示数据
+  const features = [
+    {
+      image: 'static/images/chat.png',
+      caption: 'Main Chat Interface - Natural Language Interaction',
+      alt: 'MyDataPilot Chat Interface'
+    },
+    {
+      image: 'static/images/sub-task.png',
+      caption: 'Task Planning - Review and Edit AI\'s Approach',
+      alt: 'Task Planning Interface'
+    },
+    {
+      image: 'static/images/history1.png',
+      caption: 'Transparent AI Dialogue - See How AI Thinks',
+      alt: 'AI Communication Records'
+    },
+    {
+      image: 'static/images/result.png',
+      caption: 'Interactive Controls - Guide Execution at Every Step',
+      alt: 'Execution Controls'
+    }
+  ];
+  
+  let currentFeature = 0;
+  let autoPlayInterval;
+  
+  // 显示特定功能
+  function showFeature(index) {
+    currentFeature = index;
+    const img = document.getElementById('feature-image');
+    const caption = document.getElementById('feature-caption');
+    
+    // 淡出效果
+    img.style.opacity = '0.5';
+    
+    setTimeout(() => {
+      img.src = features[index].image;
+      img.alt = features[index].alt;
+      caption.textContent = features[index].caption;
+      img.style.opacity = '1';
+      
+      // 更新指示器
+      updateIndicators(index);
+    }, 150);
+    
+    // 重置自动播放
+    resetAutoPlay();
+  }
+  
+  // 更新指示器
+  function updateIndicators(activeIndex) {
+    for (let i = 0; i < features.length; i++) {
+      const indicator = document.getElementById(`indicator-${i}`);
+      if (i === activeIndex) {
+        indicator.classList.remove('fa-circle');
+        indicator.classList.add('fa-circle', 'has-text-primary');
+      } else {
+        indicator.classList.remove('has-text-primary');
+        indicator.classList.add('fa-circle');
+      }
+    }
+  }
+  
+  // 自动播放
+  function startAutoPlay() {
+    autoPlayInterval = setInterval(() => {
+      currentFeature = (currentFeature + 1) % features.length;
+      showFeature(currentFeature);
+    }, 4000); // 每4秒切换一次
+  }
+  
+  // 重置自动播放
+  function resetAutoPlay() {
+    clearInterval(autoPlayInterval);
+    startAutoPlay();
+  }
+  
+  // 初始化
+  document.addEventListener('DOMContentLoaded', function() {
+    updateIndicators(0);
+    startAutoPlay();
+    
+    // 鼠标悬停时暂停自动播放
+    const imageBox = document.querySelector('#feature-image').parentElement.parentElement;
+    imageBox.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+    imageBox.addEventListener('mouseleave', () => startAutoPlay());
+  });
+</script>
+
+<!-- 添加一些额外的CSS样式 -->
+<style>
+  /* 按钮组样式优化 */
+  .buttons.is-centered .button {
+    margin: 0.25rem;
+  }
+  
+  /* 图片切换动画 */
+  #feature-image {
+    min-height: 300px;
+    object-fit: contain;
+    background-color: #f5f5f5;
+  }
+  
+  /* 指示器样式 */
+  .tag.is-light .icon i {
+    font-size: 0.5rem;
+    margin: 0 0.2rem;
+    transition: color 0.3s ease;
+  }
+  
+  /* 响应式调整 */
+  @media screen and (max-width: 768px) {
+    .buttons.is-centered .button {
+      font-size: 0.75rem;
+      padding: 0.5rem 0.75rem;
+    }
+    
+    .buttons.is-centered .button .icon {
+      margin-right: 0.25rem !important;
+    }
+  }
+
+
+/* Video Container Styles */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.video-demo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* 视频控制条样式优化 */
+.video-demo::-webkit-media-controls-panel {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* 响应式视频 */
+@media screen and (max-width: 768px) {
+  .video-container {
+    margin: 0 -1.5rem;
+    border-radius: 0;
+  }
+  
+  .video-demo {
+    border-radius: 0;
+  }
+}
+
+</style>
+</body>
+</html>
